@@ -1,5 +1,5 @@
+I decided to use my github repo as a diary of my master program. Because i am reaally really messy, so [i am cleanin' out my closet](https://www.youtube.com/watch?v=RQ9_TKayu9s)
+
 ## One more cup of coffee for R 
 
-## Week 2 (Oct 10)
-
-+ Test for new website.
++ [Here](https://mef-bda503.github.io/pj-ferayece/) is my progress journal with R, from bottom to top. 
