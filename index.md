@@ -4,4 +4,6 @@ I decided to use my github repo as a diary of my master program. Because i am re
 
 + [Here](https://mef-bda503.github.io/pj-ferayece/) is my progress journal with R, from bottom to top. 
 
+
+## "So once you do know what the question actually is, you'll know what the answer means.” 
 ![image](dontpanic.jpg)
