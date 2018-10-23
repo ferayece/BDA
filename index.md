@@ -3,8 +3,8 @@ I decided to use my github repo as a diary of my master program. Because i am re
 ## One more cup of coffee for R 
 
 + [Here](https://mef-bda503.github.io/pj-ferayece/) is my progress journal with R, from bottom to top. 
++ [Here](https://mef-bda503.github.io/gpj-datamunglers-2/) is the website of team works. 
 + Data file for final exam is [available](/files/BDA503R/mainData.RData)
-+
 
 *"So once you do know what the question actually is, you'll know what the answer means.”* 
 ![image](dontpanic.jpg)
