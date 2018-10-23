@@ -46,8 +46,8 @@ I decided to use my github repo as a diary of my master program. Because i am re
 
 + I completed following Udacity courses for this lecture:
 
-      - [Intro to Descriptive Statistics](https://classroom.udacity.com/courses/ud827)
-      - [Intro to Inferential Statistics](https://classroom.udacity.com/courses/ud201)
+      - (Intro to Descriptive Statistics)[https://classroom.udacity.com/courses/ud827]
+      - (Intro to Inferential Statistics)[https://classroom.udacity.com/courses/ud201]
       
 
 
