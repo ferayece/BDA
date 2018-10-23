@@ -9,7 +9,7 @@ I decided to use my github repo as a diary of my master program. Because i am re
 + [Here](/files/BDA505/20180105_International_2.html) is the team project report of the lecture. The project is playing with  The U.S. Census Bureau's International Dataset. Data is stored in PostGreSQL database and R is used for descriptive analysis.
 
 
-## Data Science with Python (BDA 507)
+## Playing Data with Python (BDA 507)
 
 + This lecture is "Intro to Programming for Big Data" with Python. Mostly descriptive analytics with Python.
 
