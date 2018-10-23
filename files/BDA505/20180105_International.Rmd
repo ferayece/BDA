@@ -1,0 +1,499 @@
+---
+title: "Term Project of BDA 507"
+author: "dataMunglers"
+date: "05 Jan 2018"
+output:
+  html_document:
+    highlight: tango
+    theme: united
+    toc: yes
+    toc_depth: 6
+  pdf_document:
+    toc: yes
+    toc_depth: '6'
+---
+
+### Team Members
+  
+  * *__[Ahmet Yetkin Eser](https://www.linkedin.com/in/ahmet-yetkin-eser-04178a40/)__*
+  
+  * *__[Berkay Soyer](https://www.linkedin.com/in/berkaysoyer/)__*
+  
+  * *__[Feray Ece Topcu]()__*
+
+### Our Objective
+
+ Our aim is focusing on Turkey data. The main objective is understanding Turkey population distribution based on the different parameters like age, sex, year and etc. Exploring some information about population growing rate according to gender may be additional part. Furthermore, we want to visualize this numbers with graphs to make this dataset more understandable. To sum up, the main aim is understanding the distribution of Turkey population and exploring some interesting information by using PostgreSQL and R Language. *****Düzelt*****
+
+### Dataset
+
+ The United States Census Bureau’s International Dataset provides estimates of country populations since 1950 and projections through 2050. Specifically, the data set includes midyear population figures broken down by age and gender assignment at birth. Additionally, they provide time-series data for attributes including fertility rates, birth rates, death rates, and migration rates.
+The U.S. Census Bureau provides estimates and projections for countries and areas that are recognized by the U.S. Department of State that have a population of at least 5,000.
+
+ This dataset can be available from this URL:
+ https://www.kaggle.com/census/international-data/data
+ 
+ Size of total dataset is 1.70 GB. It is formed by 8 different csv file that can be ordered as:
+ 
+  * age_specific_fertility_rates.csv
+  * birth_death_growth_rates.csv
+  *	country_names_area.csv
+  *	midyear_population.csv
+  * midyear_population_5yr_age_sex.csv	
+  * midyear_population_age_country_code.csv
+  * midyear_population_age_sex.csv
+  * mortality_life_expectancy.csv
+
+Tables are explained on Proposal Part briefly and proposal document can be reachable from [here](https://github.com/MEF-BDA503/pj-ferayece/blob/master/BDA-507/BDA%20505-Porposal.pdf)
+
+ 
+
+## Data Analysis
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+* Load required libraries and show table names on the database.
+
+```{r message=FALSE,warning=FALSE}
+#load libraries:
+
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(ggplot2)
+library(corrplot)
+library(RPostgreSQL)
+library(gridExtra)
+
+#db connection with postgresql:
+
+drvv <- dbDriver("PostgreSQL") # load postgresql driver
+
+### create a connection to a database using the driver:
+con <- dbConnect(drvv,
+                 dbname = "postgres",
+                 host = "localhost",
+                 port = 5432,
+                 user = "postgres",
+                 password = "sys")
+
+
+#dbDisconnect(con)   close the connection
+
+#Read table names from DB:
+table_names <- dbGetQuery(con,
+                          "SELECT table_name
+                          FROM information_schema.tables 
+                          WHERE table_type = 'BASE TABLE'
+                          AND table_schema = 'public'
+                          ORDER BY table_name
+                          "
+)
+
+table_names
+
+#table.Country <- dbReadTable(con, "country_names_area")
+
+```
+
+* Take Life Expactancy Rate from PostGreSQL DB with the query as follow:
+
+```{r message=FALSE,warning=FALSE}
+
+query.lifeexpectancy<-dbGetQuery(con,"SELECT
+                                      TR.YEAR,
+                                      TR.LIFE_EXPECTANCY_MALE AS LIFE_EXPECTANCY_MALE_TR,
+                                      TR.LIFE_EXPECTANCY_FEMALE AS LIFE_EXPECTANCY_FEMALE_TR,
+                                      ROUND(CAST((TR.LIFE_EXPECTANCY_MALE/TR.LIFE_EXPECTANCY_FEMALE) AS NUMERIC), 2) AS MALE_FEMALE_RATIO_TR,
+                                      TOT.LIFE_EXPECTANCY_MALE AS LIFE_EXPECTANCY_MALE_TOTAL,
+                                      TOT.LIFE_EXPECTANCY_FEMALE AS LIFE_EXPECTANCY_FEMALE_TOTAL,
+                                      ROUND(CAST((TOT.LIFE_EXPECTANCY_MALE/TOT.LIFE_EXPECTANCY_FEMALE) AS NUMERIC), 2) AS MALE_FEMALE_RATIO_TOT
+                                      FROM
+                                      (
+                                          SELECT
+                                          COUNTRY_NAME,
+                                          YEAR,
+                                          LIFE_EXPECTANCY_MALE,
+                                          LIFE_EXPECTANCY_FEMALE
+                                          FROM
+                                          MORTALITY_LIFE_EXPECTANCY
+                                          WHERE COUNTRY_NAME = 'Turkey'
+                                          AND YEAR <= 2017
+                                      ) TR
+                                      JOIN
+                                      (
+                                          SELECT YEAR,
+                                          ROUND(CAST(FLOAT8 (AVG(LIFE_EXPECTANCY_MALE)) AS NUMERIC), 2) AS LIFE_EXPECTANCY_MALE,
+                                          ROUND(CAST(FLOAT8 (AVG(LIFE_EXPECTANCY_FEMALE)) AS NUMERIC), 2) AS LIFE_EXPECTANCY_FEMALE
+                                          FROM
+                                          MORTALITY_LIFE_EXPECTANCY
+                                          WHERE YEAR <= 2017
+                                          GROUP BY YEAR
+                                      ) TOT ON TR.YEAR = TOT.YEAR
+                                      ORDER BY TR.YEAR"
+                                  )
+
+# take life expectancy according to genders in Turkey: 
+
+le.male.tr <- query.lifeexpectancy %>% 
+  select(year,life_expectancy=life_expectancy_male_tr,male_female_ratio_tr) %>%
+  mutate(sex="male")
+                                
+le.female.tr <- query.lifeexpectancy %>% 
+  select(year,life_expectancy=life_expectancy_female_tr,male_female_ratio_tr) %>%
+  mutate(sex="female")
+
+le.tr <- union_all(le.male.tr,le.female.tr)
+
+# take life expectancy according to genders in Total:
+
+le.male.tot <- query.lifeexpectancy %>%
+  select(year,life_expectancy=life_expectancy_male_total,male_female_ratio_tot) %>%
+  mutate(sex="male")
+
+le.female.tot <- query.lifeexpectancy %>%
+  select(year,life_expectancy=life_expectancy_female_total,male_female_ratio_tot) %>%
+  mutate(sex="female")
+
+le.tot <- union_all(le.male.tot,le.female.tot)
+
+head(le.tr)
+
+#dim(query.lifeexpectancy)
+#summary(query.lifeexpectancy)
+#head(query.lifeexpectancy,5)
+
+##1 
+
+  g0 <- ggplot(le.tr, aes(x = year, y = life_expectancy, fill = sex)) +
+   geom_bar(aes(y=life_expectancy),stat = "identity",position = position_dodge()) +
+   scale_y_continuous(limits = c(0,100)) +
+   ggtitle("Life Expectancy due to Genders in Turkey") +
+   labs(y="Life Expectancy", x="Year") +
+   theme_classic()
+  
+  g1 <- ggplot(le.tr, aes(x = year, y = male_female_ratio_tr)) +
+   geom_line(size=1.5,color=c("darkslategrey")) +
+   scale_y_continuous(limits = c(0.90,1)) +
+   ggtitle("Life Expectancy due to Genders in Turkey") +
+   labs(y="Life Expectancy", x="Year") +
+   theme_classic()  
+  
+  g2 <- ggplot(le.tot, aes(x = year, y = life_expectancy, fill = sex)) +
+   geom_bar(aes(y=life_expectancy),stat = "identity",position = position_dodge()) +
+   scale_y_continuous(limits = c(0,100)) +
+   ggtitle(" AVG Life Expectancy due to Genders in the World") +
+   labs(y="Life Expectancy", x="Year") +
+   theme_classic()
+  
+  g3 <- ggplot(le.tot, aes(x = year, y = male_female_ratio_tot)) +
+   geom_line(size=1.5,color=c("darkslategrey")) +
+   scale_y_continuous(limits = c(0.90,1)) +
+   ggtitle(" AVG Life Expectancy due to Genders in the World") +
+   labs(y="Life Expectancy", x="Year") +
+   theme_classic()  
+
+ grid.arrange(g0,g1,ncol=1)
+ grid.arrange(g2,g3,ncol=1)
+ 
+```
+
+* Find the distinct count of country to use on calculations.
+
+```{r message=FALSE,warning=FALSE}
+
+query.cnt_country<-dbGetQuery(con,"SELECT
+                                      COUNT(DISTINCT(COUNTRY_NAME)) AS NUMBER_OF_COUNTRY
+                                      FROM
+                                      MORTALITY_LIFE_EXPECTANCY"
+                                  )
+
+query.cnt_country
+
+```
+
+* Find the crude birth rate like as follow: 
+
+```{r message=FALSE,warning=FALSE}
+
+query.crude_birth_rate<-dbGetQuery(con,"SELECT
+                                      TR.YEAR,
+                                      TR.CRUDE_BIRTH_RATE AS CRUDE_BIRTH_RATE_TR,
+                                      TR.CRUDE_DEATH_RATE AS CRUDE_DEATH_RATE_TR,
+                                      ROUND(CAST(FLOAT8 (TR.CRUDE_BIRTH_RATE/TR.CRUDE_DEATH_RATE) AS NUMERIC), 2) AS BIRTH_DATE_RATIO_TR,
+                                      TOT.CRUDE_BIRTH_RATE AS CRUDE_BIRTH_RATE_TOT,
+                                      TOT.CRUDE_DEATH_RATE AS CRUDE_DEATH_RATE_TOT,
+                                      ROUND(CAST(FLOAT8 (TOT.CRUDE_BIRTH_RATE/TOT.CRUDE_DEATH_RATE) AS NUMERIC), 2) AS BIRTH_DATE_RATIO_TOT
+                                      FROM
+                                      (
+                                          SELECT
+                                          YEAR,
+                                          CRUDE_BIRTH_RATE,
+                                          CRUDE_DEATH_RATE
+                                          FROM
+                                          BIRTH_DEATH_GROWTH_RATES
+                                          WHERE COUNTRY_NAME = 'Turkey'
+                                          AND YEAR <= 2017
+                                      ) TR
+                                      JOIN
+                                      (
+                                          SELECT
+                                          YEAR,
+                                          ROUND(CAST(FLOAT8 (AVG(CRUDE_BIRTH_RATE)) AS NUMERIC), 2) CRUDE_BIRTH_RATE,
+                                          ROUND(CAST(FLOAT8 (AVG(CRUDE_DEATH_RATE)) AS NUMERIC), 2) AS CRUDE_DEATH_RATE
+                                          FROM
+                                          BIRTH_DEATH_GROWTH_RATES
+                                          WHERE YEAR <= 2017
+                                          GROUP BY YEAR
+                                      ) TOT ON TR.YEAR = TOT.YEAR
+                                      ORDER BY TR.YEAR"
+                                  )
+
+#query.crude_birth_rate
+#dim(query.crude_birth_rate)
+#summary(query.crude_birth_rate)
+head(query.crude_birth_rate,5)
+
+# take birth death rates in Turkey:    --CRUDE_BIRTH_RATE_TR
+
+birth.tr <- query.crude_birth_rate %>%
+  select(year,rate=crude_birth_rate_tr,ratio =birth_date_ratio_tr) %>%
+  mutate(type="birth")
+
+death.tr <- query.crude_birth_rate %>%
+  select(year,rate=crude_death_rate_tr,ratio =birth_date_ratio_tr) %>%
+  mutate(type="death")
+
+bd.tr <- union_all(birth.tr,death.tr)
+
+normalizer <- max(bd.tr$rate)/max(bd.tr$ratio)
+
+g0 <- ggplot(bd.tr, aes(x = year, y = rate/normalizer, fill = type)) +
+   geom_bar(aes(y=rate),stat = "identity",position = position_dodge()) +
+   geom_line(aes(y=ratio*normalizer),size=1.5,color=c("lightskyblue4")) +
+   ggtitle("Birth - Death Rate in Turkey and The Ratio") +
+   scale_y_continuous(sec.axis = sec_axis(trans = ~.* 1/normalizer, name = 'Birth/Death Ratio'))+
+   labs(y="Birth-Death Rate per 1000 Population", x="Year") +
+   theme_classic()
+
+# take birth death rates in the World:
+
+birth.tot <- query.crude_birth_rate %>%
+  select(year,rate=crude_birth_rate_tot,ratio =birth_date_ratio_tot) %>%
+  mutate(type="birth")
+
+death.tot <- query.crude_birth_rate %>%
+  select(year,rate=crude_death_rate_tot,ratio =birth_date_ratio_tot) %>%
+  mutate(type="death")
+
+bd.tot <- union_all(birth.tot,death.tot)
+
+normalizer <- max(bd.tot$rate)/max(bd.tot$ratio)
+
+g1 <- ggplot(bd.tot, aes(x = year, y = rate/normalizer, fill = type)) +
+   geom_bar(aes(y=rate),stat = "identity",position = position_dodge()) +
+   geom_line(aes(y=ratio*normalizer),size=1.5,color=c("lightskyblue4")) +
+   ggtitle("Birth - Death Rate in the World and The Ratio") +
+   scale_y_continuous(sec.axis = sec_axis(trans = ~.* 1/normalizer, name = 'Birth/Death Ratio'))+
+   labs(y="Birth-Death Rate per 1000 Population", x="Year") +
+   theme_classic()
+
+#grid.arrange(g0,g1,ncol=1)
+
+g0
+g1
+```
+
+* Create a new table with age category:
+
+```{r message=FALSE,warning=FALSE}
+
+is_exist <- dbExistsTable(con, "POPULATION_AGE_SUMMARY")
+is_exist
+
+dbGetQuery(con,"CREATE TABLE POPULATION_AGE_SUMMARY AS
+SELECT
+YEAR,
+COUNTRY_CODE,
+AGE,
+CASE
+WHEN AGE <= 20 THEN '00 - 20'
+WHEN AGE <= 40 THEN '21 - 40'
+WHEN AGE <= 60 THEN '41 - 60'
+WHEN AGE <= 80 THEN '61 - 80'
+WHEN AGE <= 100 THEN '81 - 100' END AGE_CATEGORY,
+POPULATION,
+SEX
+FROM
+MIDYEAR_POPULATION_AGE_COUNTRY_CODE
+WHERE YEAR <= 2017
+ORDER BY AGE"
+)
+
+```
+
+* Female Male Population Average for each year both for Turkey and all World.
+
+```{r message=FALSE,warning=FALSE}
+
+
+query.sex_aveg_population <-dbGetQuery(con,"WITH TR AS
+                (
+                   SELECT
+                   YEAR,
+                   SUM(POPULATION) AS POPULATION_TOT_TR,
+                   SUM(CASE WHEN SEX = 'Male' THEN POPULATION END) AS POPULATION_MALE_TR,
+                   SUM(CASE WHEN SEX = 'Female' THEN POPULATION END) AS POPULATION_FEMALE_TR
+                   FROM
+                   POPULATION_AGE_SUMMARY
+                   WHERE COUNTRY_CODE = 'TU'
+                   GROUP BY YEAR
+                ),
+                ALLS AS
+                (
+                   SELECT
+                   YEAR,
+                   SUM(POPULATION)/COUNT(DISTINCT COUNTRY_CODE) AS POPULATION_TOT_ALL,
+                   SUM(CASE WHEN SEX = 'Male' THEN POPULATION END)/COUNT(DISTINCT COUNTRY_CODE) AS POPULATION_MALE_ALL,
+                   SUM(CASE WHEN SEX = 'Female' THEN POPULATION END)/COUNT(DISTINCT COUNTRY_CODE) AS POPULATION_FEMALE_ALL
+                   FROM
+                   POPULATION_AGE_SUMMARY
+                   GROUP BY YEAR
+                )
+                SELECT
+                TR.YEAR,
+                POPULATION_TOT_TR,
+                POPULATION_MALE_TR,
+                POPULATION_FEMALE_TR,
+                POPULATION_TOT_ALL,
+                POPULATION_MALE_ALL,
+                POPULATION_FEMALE_ALL
+                FROM TR
+                JOIN ALLS ON TR.YEAR = ALLS.YEAR
+                ORDER BY TR.YEAR DESC")
+
+new <- query.sex_aveg_population%>% mutate(tr_male_rate = round(population_male_tr/population_tot_tr,5),
+                                          tr_female_rate =round(population_female_tr/population_tot_tr,5),
+                                          all_male_rate = round(population_male_all/population_tot_all,5),
+                                          all_female_rate = round(population_female_all/population_tot_all,5))
+#head(new,38)
+
+
+g0 <- ggplot(new,aes(x=year,y=tr_female_rate)) + geom_line(size=1.5,color=c("tomato")) + 
+      scale_y_continuous(limits=c(0.493,0.506)) +
+      ggtitle("Female Population Ratio in Turkey") + theme_classic()
+g1 <- ggplot(new,aes(x=year,y=all_female_rate)) + geom_line(size=1.5,color=c("tomato")) +
+      scale_y_continuous(limits=c(0.493,0.506)) +
+      ggtitle("Female Population Ratio in the World") + theme_classic()
+
+grid.arrange(g0,g1,nrow=1)
+
+#query.sex_aveg_population 
+#head(query.sex_aveg_population)
+#dim(query.sex_aveg_population)
+#summary(query.sex_aveg_population)
+#head(query.sex_aveg_population,38)
+
+```
+
+* Population distribution and rates among the age categories:
+
+```{r message=FALSE}
+
+
+query.avg_population <-dbGetQuery(con,"WITH TR AS
+                          (
+                            SELECT
+                            YEAR,
+                            SUM(CASE WHEN AGE_CATEGORY = '00 - 20' THEN POPULATION ELSE 0 END) AS TR_00_20_POPULATION,
+                            SUM(CASE WHEN AGE_CATEGORY = '21 - 40' THEN POPULATION ELSE 0 END) AS TR_21_40_POPULATION,
+                            SUM(CASE WHEN AGE_CATEGORY = '41 - 60' THEN POPULATION ELSE 0 END) AS TR_41_60_POPULATION,
+                            SUM(CASE WHEN AGE_CATEGORY = '61 - 80' THEN POPULATION ELSE 0 END) AS TR_61_80_POPULATION,
+                            SUM(CASE WHEN AGE_CATEGORY = '81 - 100' THEN POPULATION ELSE 0 END) AS TR_81_100_POPULATION,
+                            SUM(POPULATION) AS POPULATION_TR
+                            FROM
+                            POPULATION_AGE_SUMMARY
+                            WHERE COUNTRY_CODE = 'TU'
+                            GROUP BY YEAR
+                          ),
+                          ALLS AS
+                          (
+                            SELECT
+                            YEAR,
+                            SUM(CASE WHEN AGE_CATEGORY = '00 - 20' THEN POPULATION ELSE 0 END)/COUNT(DISTINCT COUNTRY_CODE) AS ALL_00_20_POPULATION,
+                            SUM(CASE WHEN AGE_CATEGORY = '21 - 40' THEN POPULATION ELSE 0 END)/COUNT(DISTINCT COUNTRY_CODE) AS ALL_21_40_POPULATION,
+                            SUM(CASE WHEN AGE_CATEGORY = '41 - 60' THEN POPULATION ELSE 0 END)/COUNT(DISTINCT COUNTRY_CODE) AS ALL_41_60_POPULATION,
+                            SUM(CASE WHEN AGE_CATEGORY = '61 - 80' THEN POPULATION ELSE 0 END)/COUNT(DISTINCT COUNTRY_CODE) AS ALL_61_80_POPULATION,
+                            SUM(CASE WHEN AGE_CATEGORY = '81 - 100' THEN POPULATION ELSE 0 END)/COUNT(DISTINCT COUNTRY_CODE) AS ALL_81_100_POPULATION,
+                            SUM(POPULATION)/COUNT(DISTINCT COUNTRY_CODE) AS POPULATION_ALL   FROM
+                            POPULATION_AGE_SUMMARY
+                            GROUP BY YEAR
+                          )
+                          SELECT
+                          TR.YEAR,
+                          TR_00_20_POPULATION,
+                          TR_21_40_POPULATION,
+                          TR_41_60_POPULATION,
+                          TR_61_80_POPULATION,
+                          TR_81_100_POPULATION,
+                          POPULATION_TR,
+                          ALL_00_20_POPULATION,
+                          ALL_21_40_POPULATION,
+                          ALL_41_60_POPULATION,
+                          ALL_61_80_POPULATION,
+                          ALL_81_100_POPULATION,
+                          POPULATION_ALL FROM TR
+                          JOIN ALLS ON TR.YEAR = ALLS.YEAR
+                          ORDER BY TR.YEAR DESC")
+
+
+
+new <- query.avg_population %>% mutate(tr_0_20_rate = round(tr_00_20_population /population_tr,3),
+                                       all_0_20_rate = round(all_00_20_population /population_all,3))
+head(new)
+
+g0 <- ggplot(new,aes(x=year,y=tr_0_20_rate)) + geom_line(size=1.5,color=c("tomato")) + 
+      scale_y_continuous(limits=c(0.30,0.70)) +
+      ggtitle("Young (0-20) Population Ratio in Turkey") + theme_classic()
+g1 <- ggplot(new,aes(x=year,y=all_0_20_rate)) + geom_line(size=1.5,color=c("tomato")) +
+      scale_y_continuous(limits=c(0.30,0.70)) +
+      ggtitle("Young(0-20) Population Ratio in the World") + theme_classic()
+
+g0
+g1
+
+#query.sex_aveg_population 
+#head(query.avg_population)
+#dim(query.avg_population )
+#summary(query.avg_population)
+#head(query.sex_aveg_population,38)
+
+
+```
+
+* Young population among the selected years in the World: 
+
+```{r message=FALSE,warning=FALSE}
+
+query.young_population<-dbGetQuery(con,"SELECT
+                                      YEAR,
+                                      COUNTRY_CODE,
+                                      SUM(CASE WHEN AGE_CATEGORY = '00 - 20' THEN POPULATION ELSE 0 END) AS _00_20_POPULATION,
+                                      SUM(POPULATION) AS POPULATION,
+                                      SUM(CASE WHEN AGE_CATEGORY = '00 - 20' THEN POPULATION ELSE 0 END)/SUM(POPULATION) AS YOUNG_RATIO
+                                      FROM
+                                      POPULATION_AGE_SUMMARY
+                                      WHERE YEAR IN (1980,2000,2017)
+                                      GROUP BY YEAR,COUNTRY_CODE
+                                      ORDER BY 1 ,5 DESC")
+
+
+
+dim(query.young_population)
+summary(query.young_population)
+head(query.young_population,38)
+
+```
