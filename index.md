@@ -40,7 +40,7 @@ I decided to use my github repo as a diary of my master program. Because i am re
 
 ## Intro to Statistics (BDA 501)
 
-+ Basic statistical methods for understand the data.
++ Basic statistical methods for understanding the data.
 
 + All slides shared by Instructor are [available](/files/BDA501/all_slides) 
 
