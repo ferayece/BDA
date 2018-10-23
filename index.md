@@ -1,6 +1,6 @@
 I decided to use my github repo as a diary of my master program. Because i am reaally really messy, so [i am cleanin' out my closet.](https://www.youtube.com/watch?v=RQ9_TKayu9s) 
 
-## Big Data Management -If you can manage- (BDA 505)
+## B.D. Management -If you can manage- (BDA 505)
 
 + Some hard-core stuff about Big Data Technologies such that Hadoop, Dockers, PostGreSQL and etc. 
 
