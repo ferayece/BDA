@@ -17,7 +17,7 @@ I decided to use my github repo as a diary of my master program. Because i am re
 
   - [Intro to Python for Data Science](https://www.datacamp.com/courses/intro-to-python-for-data-science) 
 
-+ The report of the term project is [available](/files/BDA507Python/BDA 507-Term Project Report Feray Ece Topcu.pdf). The project  The source code of the project is also [available](/files/BDA507Python/starbucks_term_project.py)
++ The report of the term project is [available](/files/BDA507Python/BDA 507-Term Project Report Feray Ece Topcu.pdf). The project  The source code of the project is also [available](/files/BDA507Python/starbucks_term_project.py). The term project is using Starbucks Location Data for descriptive analysis. 
 
 + The answer of final exam can be found on [repo](/files/BDA507Python/Final_Exam.py)
 
