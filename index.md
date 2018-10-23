@@ -22,9 +22,34 @@ I decided to use my github repo as a diary of my master program. Because i am re
 
 ## One more cup of coffee for R (BDA 503)
 
++ R for data analysis.
+
++ I completed following Datacamp courses for this lecture:
+
+  - (Introduction to R)[https://www.datacamp.com/courses/free-introduction-to-r]
+  - (Data Visualization with R)[https://www.datacamp.com/tracks/data-visualization-with-r]
+  - (Importing & Cleaning Data with R)[https://www.datacamp.com/tracks/importing-cleaning-data-with-r]
+
 + [Here](https://mef-bda503.github.io/pj-ferayece/) is my progress journal with R, from bottom to top. 
+
 + [Here](https://mef-bda503.github.io/gpj-datamunglers-2/) is the website of team works. 
+
++ [Here](/files/BDA503R/Cheatsheets/) is useful cheatsheets to start R. 
+
 + Data file for final exam is [available](/files/BDA503R/mainData.RData)
+
+## Intro to Statistics (BDA 501)
+
++ Basic statistical methods for understand the data.
+
++ All slides shared by Instructor are [available](/files/BDA501/all_slides) 
+
++ I completed following Udacity courses for this lecture:
+
+      - [Intro to Descriptive Statistics](https://classroom.udacity.com/courses/ud827)
+      - [Intro to Inferential Statistics](https://classroom.udacity.com/courses/ud201)
+      
+
 
 *"So once you do know what the question actually is, you'll know what the answer means.”* 
 ![image](dontpanic.jpg)
