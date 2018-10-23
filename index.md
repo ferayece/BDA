@@ -26,9 +26,9 @@ I decided to use my github repo as a diary of my master program. Because i am re
 
 + I completed following Datacamp courses for this lecture:
 
-  - (Introduction to R)[https://www.datacamp.com/courses/free-introduction-to-r]
-  - (Data Visualization with R)[https://www.datacamp.com/tracks/data-visualization-with-r]
-  - (Importing & Cleaning Data with R)[https://www.datacamp.com/tracks/importing-cleaning-data-with-r]
+  - [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r)
+  - [Data Visualization with R](https://www.datacamp.com/tracks/data-visualization-with-r)
+  - [Importing & Cleaning Data with R](https://www.datacamp.com/tracks/importing-cleaning-data-with-r)
 
 + [Here](https://mef-bda503.github.io/pj-ferayece/) is my progress journal with R, from bottom to top. 
 
@@ -46,8 +46,8 @@ I decided to use my github repo as a diary of my master program. Because i am re
 
 + I completed following Udacity courses for this lecture:
 
-      - (Intro to Descriptive Statistics)[https://classroom.udacity.com/courses/ud827]
-      - (Intro to Inferential Statistics)[https://classroom.udacity.com/courses/ud201]
+      - [Intro to Descriptive Statistics](https://classroom.udacity.com/courses/ud827)
+      - [Intro to Inferential Statistics](https://classroom.udacity.com/courses/ud201)
       
 
 
