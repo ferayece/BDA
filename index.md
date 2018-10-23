@@ -1,5 +1,14 @@
 I decided to use my github repo as a diary of my master program. Because i am reaally really messy, so [i am cleanin' out my closet.](https://www.youtube.com/watch?v=RQ9_TKayu9s) 
 
+
+## Data Science with Python
+
++ This lecture is "Intro to Programming for Big Data" with Python. Mostly descriptive analytics with Python.
+
++ The report of the term project is [availabile](/files/BDA507Python/BDA 507-Term Project Report Feray Ece Topcu.pdf)
++ [Here](https://github.com/ferayece/BDA/tree/master/files/BDA507Python) is my repo directory for Python codes.
+
+
 ## One more cup of coffee for R 
 
 + [Here](https://mef-bda503.github.io/pj-ferayece/) is my progress journal with R, from bottom to top. 
