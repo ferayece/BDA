@@ -5,7 +5,7 @@ I decided to use my github repo as a diary of my master program. Because i am re
 
 + This lecture is "Intro to Programming for Big Data" with Python. Mostly descriptive analytics with Python.
 
-+ The report of the term project is [availabile](/files/BDA507Python/BDA 507-Term Project Report Feray Ece Topcu.pdf)
++ The report of the term project is [available](/files/BDA507Python/BDA 507-Term Project Report Feray Ece Topcu.pdf)
 + [Here](https://github.com/ferayece/BDA/tree/master/files/BDA507Python) is my repo directory for Python codes.
 
 
