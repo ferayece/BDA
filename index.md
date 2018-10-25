@@ -38,7 +38,7 @@ I decided to use my github repo as a diary of my master program. Because i am re
 
 + [Here](https://mef-bda503.github.io/gpj-datamunglers-2/) is the website of team works. 
 
-+ [Here](https://github.com/ferayece/BDA/tree/master/BDA503R/Cheatsheets) is useful cheatsheets to start R. 
++ [Here](https://github.com/ferayece/BDA/tree/master/BDA503R/Cheatsheets/) is useful cheatsheets to start R. 
 
 + Data file for final exam is [available](/files/BDA503R/mainData.RData)
 
@@ -46,7 +46,7 @@ I decided to use my github repo as a diary of my master program. Because i am re
 
 + Basic statistical methods for understanding the data.
 
-+ All slides shared by Instructor are [available](/files/BDA501/all_slides) 
++ All slides shared by Instructor are [available](/files/BDA501/all_slides/) 
 
 + I completed following Udacity courses for this lecture:
 
