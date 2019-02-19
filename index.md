@@ -1,4 +1,4 @@
-I decided to use my github repo as a diary of my master program. Because i am reaally really messy, so [i am cleanin' out my closet.](https://www.youtube.com/watch?v=RQ9_TKayu9s) 
+I decided to use my github repo as a diary of my master program. Because I am reaally really messy, so [i am cleanin' out my closet.](https://www.youtube.com/watch?v=RQ9_TKayu9s) 
 
 ## B.D. Management -If you can manage- (BDA 505)
 
@@ -17,7 +17,7 @@ I decided to use my github repo as a diary of my master program. Because i am re
 
   - [Intro to Python for Data Science](https://www.datacamp.com/courses/intro-to-python-for-data-science) 
 
-+ The report of the term project is [available](/files/BDA507Python/BDA 507-Term Project Report Feray Ece Topcu.pdf). The project  The source code of the project is also [available](/files/BDA507Python/starbucks_term_project.py). The term project is using Starbucks Location Data for descriptive analysis. 
++ The report of the term project is [available](/files/BDA507Python/BDA 507-Term Project Report Feray Ece Topcu.pdf). The source code of the project is also [available](/files/BDA507Python/starbucks_term_project.py). The term project is using Starbucks Location Data for descriptive analysis. 
 
 + The answer of final exam can be found on [repo](/files/BDA507Python/Final_Exam.py)
 
