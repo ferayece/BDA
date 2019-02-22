@@ -11,9 +11,9 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 + I followed Aurélien Géron's "Hands-On Machine Learning with Scikit-Learn and TensorFlow" book and Andrew Ng's "Machine Learning Yearning-Draft" book for this lecture. 
 
-+ [second assignment](/files/BDA502ML/BDA 502_Assignment2_FerayEceTopcu.pdf) and [third assignment](/files/BDA502ML/BDA 502_Assignment3_FerayEceTopcu.pdf) can be found on the repo.  
++ [second assignment](/files/BDA502ML/BDA_502_Assignment2_FerayEceTopcu.pdf) and [third assignment](/files/BDA502ML/BDA_502_Assignment3_FerayEceTopcu.pdf) can be found on the repo.  
 
-+ [Project report](/files/BDA502ML/BDA 502 Term Project Report - Feray Ece Topcu.pdf) about customer segmentation. 
++ [Project report](/files/BDA502ML/TermProject.pdf) about customer segmentation. 
 
 + [Here](https://github.com/ferayece/BDA/tree/master/files/BDA502ML/codes) is my repo directory for ML codes.
 
