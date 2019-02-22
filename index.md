@@ -19,7 +19,7 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 + [Here](/files/BDA502ML/ML_Algos_Cheatsheet.jpg) is cheatsheet for summary of ML. 
 
-+ [Here](/files/BDA502ML/ML_Cheatsheet1.png) is the cheatsheet to decide ML algorithm due to some parameters such that data, speed, accuracy and etc. 
++ [Here](https://github.com/ferayece/BDA/blob/master/files/BDA502ML/ML_Cheatsheet1.png) is the cheatsheet to decide ML algorithm due to some parameters such that data, speed, accuracy and etc. 
 
 
 ## B.D. Management -If you can manage- (BDA 505)
