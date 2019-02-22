@@ -1,6 +1,28 @@
 I decided to use my github repo as a diary of my master program. Because I am reaally really messy, so [i am cleanin' out my closet.](https://www.youtube.com/watch?v=RQ9_TKayu9s) 
 
+## Web Analytics (BDA 547)
+
++ Instructor: Sercan AKKAŞ 
+
++ insight into the basics of analytics and optimization to explore of user experience and focuses on understanding customers’ behavior by using data gathering from websites or mobile applications. 
+
++ Experience with Google Analytics/Google Data Studio and get knowledge about A/B Testing.
+
++ [Here](/files/BDA547Web/BDA547Assignment1FerayEce Topcu.pdf) is Assignment 1 which examines GA data for Google Merchandise Store. 
+
++ [Here](/files/BDA547Web/BDA547Assignment2FerayEceTopcu.pdf) is Assignment 2 includes output of three reports, generated on Google Data Studio, which used Google Analytics data of Google Merchandise Store as data source.
+
++[Here](BDA/files/BDA547Web/ExamFerayEceTopcu.pdf) is the final exam and my answers of the lecture.
+
++ I have completed [Google Analytics for Beginners](https://www.udemy.com/google-analytics-insights/learn/v4/overview) course in Udemy for this lecture.
+
++ I prepared a [cheatsheet](/files/BDA547Web/GanalyticsforBeginners.pdf) in TR for Google Analytics.  
+
++ [Google Analytics Definitions](http://www.analyticsmarket.com/blog/google-analytics-definitions)
+
 ## Optimization and Simulation (BDA 541)
+
++ Instructor: Özgür Özlük
 
 + Create optimization and simulation models, and analyze these models to provide insight regarding the assumptions, value drivers, and risks present in a business situation.
 
@@ -18,6 +40,8 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 
 ## Intro to Machine Learning (BDA 505)
+
++ Instructor: Tuna Çakar
 
 + Introduction to machine learning algorithms with python and scikit-learn library. 
 
@@ -41,6 +65,8 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 ## B.D. Management -If you can manage- (BDA 505)
 
++ Instructor: Serhat Çevikel
+
 + Some hard-core stuff about Big Data Technologies such that Hadoop, Dockers, PostGreSQL and etc. 
 
 + [Here](/files/BDA505/) is all sources for this lecture.
@@ -49,6 +75,8 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 
 ## Playing Data with Python (BDA 507)
+
++ Instructor: Tuna Çakar
 
 + This lecture is "Intro to Programming for Big Data" with Python. Mostly descriptive analytics with Python.
 
@@ -64,6 +92,8 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 
 ## One more cup of coffee for R (BDA 503)
+
++ Instructor: Berk Orbay
 
 + R for data analysis.
 
@@ -82,6 +112,8 @@ I decided to use my github repo as a diary of my master program. Because I am re
 + Data file for final exam is [available](/files/BDA503R/mainData.RData)
 
 ## Intro to Statistics (BDA 501)
+
++ Instructor: Serkan Ceran
 
 + Basic statistical methods for understanding the data.
 
