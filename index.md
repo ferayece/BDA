@@ -14,7 +14,7 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 + [Here](https://github.com/ferayece/BDA/tree/master/files/BDA541Opt/codes) is my repo directory for BDA 541 codes.
 
-+[Here](/files/BDA541Opt/final/) is the final exam of the lecture and the answers in excel and R.
++ [Here](/files/BDA541Opt/final/) is the final exam of the lecture and the answers in excel and R.
 
 
 ## Intro to Machine Learning (BDA 505)
