@@ -13,11 +13,11 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 + [second assignment](/files/BDA502ML/BDA_502_Assignment2_FerayEceTopcu.pdf) and [third assignment](/files/BDA502ML/BDA_502_Assignment3_FerayEceTopcu.pdf) can be found on the repo.  
 
-+ [Project report](/files/BDA502ML/TermProject.pdf) about customer segmentation. 
++ [Term Project Report](/files/BDA502ML/TermProject.pdf) about Customer Segmentation. 
 
 + [Here](https://github.com/ferayece/BDA/tree/master/files/BDA502ML/codes) is my repo directory for ML codes.
 
-+ [Here](/files/BDA502ML/ML_Algos_Cheatsheet.jpg) is cheatsheet for summary of ML. 
++ [Here](/files/BDA502ML/ML_Algos_Cheatsheet.jpg) is the cheatsheet for summary of ML. 
 
 + [Here](https://github.com/ferayece/BDA/blob/master/files/BDA502ML/ML_Cheatsheet1.png) is the cheatsheet to decide ML algorithm due to some parameters such that data, speed, accuracy and etc. 
 
