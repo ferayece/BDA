@@ -4,7 +4,7 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 + Create optimization and simulation models, and analyze these models to provide insight regarding the assumptions, value drivers, and risks present in a business situation.
 
-+ All video resources recorded by Instructor, Özgür Özlük.
++ All video resources recorded by Instructor.
 
 + I followed Modeling and Solving LP with R, Sallan et al. for this lecture.
 
