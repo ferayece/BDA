@@ -1,5 +1,22 @@
 I decided to use my github repo as a diary of my master program. Because I am reaally really messy, so [i am cleanin' out my closet.](https://www.youtube.com/watch?v=RQ9_TKayu9s) 
 
+## Optimization and Simulation (BDA 541)
+
++ Create optimization and simulation models, and analyze these models to provide insight regarding the assumptions, value drivers, and risks present in a business situation.
+
++ All video resources recorded by Instructor, Özgür Özlük.
+
++ I followed Modeling and Solving LP with R, Sallan et al. for this lecture.
+
++ All problems solved with both Excel (with Solver) and R (lpSolve, ROI, ompr, mc2d, triangle, lpSolveAPI and etc. libraries ).  
+
++ [Here](/files/BDA541Opt/BDA541Syllabus.pdf) is syllabus for this lecture.
+
++ [Here](https://github.com/ferayece/BDA/tree/master/files/BDA541Opt/codes) is my repo directory for BDA 541 codes.
+
++[Here](/files/BDA541Opt/final/) is the final exam of the lecture and the answers in excel and R.
+
+
 ## Intro to Machine Learning (BDA 505)
 
 + Introduction to machine learning algorithms with python and scikit-learn library. 
