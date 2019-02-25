@@ -1,5 +1,20 @@
 I decided to use my github repo as a diary of my master program. Because I am reaally really messy, so [i am cleanin' out my closet.](https://www.youtube.com/watch?v=RQ9_TKayu9s) 
 
+## Marketing Analytics (BDA 523)
+
++ Instructor: Kalender Karakoç 
+
++ The basic understanding of analytics problems inmarketing. Approaches to marketing intelligence problems, such as forecasting, price sensitivity, customer churn, customer segmentation and campaign management.
+
++ [Here](/files/BDA523Marketing/Assignment1.html) is Assignment 1 which aims to generate customer segmentation with clustering methods and It is developed in R. 
+
++ [Here](/files/BDA523Marketing/Assignment2.html) is Assignment 2 which aims to predict Income with logistic regression on Adult dataset.
+
++ [Here](/files/BDA523Marketing/20180523_Marketing_Final.html) is the term project of the lecture. The goal of the term project is to predict customer churn with classification algorithms such as logistic regression and XgBoost. 
+
++ I followed "R for Marketing Research and Analytics", Chapman and Feit  as primary book for this lecture. I also read "Data Mining Techniques in CRM: Inside Customer Segmentation",Tsiptsis et al. to understand the metrics of CRM. 
+
+
 ## Web Analytics (BDA 547)
 
 + Instructor: Sercan AKKAŞ 
