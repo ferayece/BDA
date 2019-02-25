@@ -8,8 +8,8 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 
 + Reference Materials:
-- Friedman, J., Hastie, T., & Tibshirani, R. (2016). The Elements of Statistical Learning: Data Mining, Inference, and Prediction (2nd Ed.). New York: Springer.
-- Tibshirani, R., James, G., Witten, D., & Hastie, T. (2013). An Introduction to Statistical Learning with Applications in R. New York: Springer.
+    - Friedman, J., Hastie, T., & Tibshirani, R. (2016). The Elements of Statistical Learning: Data Mining, Inference, and Prediction (2nd Ed.). New York: Springer.
+    - Tibshirani, R., James, G., Witten, D., & Hastie, T. (2013). An Introduction to Statistical Learning with Applications in R. New York: Springer.
 
 ## End to End Analytics (BDA 564)
 
