@@ -12,7 +12,7 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 + [Here](/files/BDA547Web/BDA547Assignment2FerayEceTopcu.pdf) is Assignment 2 includes output of three reports, generated on Google Data Studio, which used Google Analytics data of Google Merchandise Store as data source.
 
-+ [Here](BDA/files/BDA547Web/ExamFerayEceTopcu.pdf) is the final exam of the lecture and my answers. 
++ [Here](files/BDA547Web/ExamFerayEceTopcu.pdf) is the final exam of the lecture and my answers. 
 
 + I have completed [Google Analytics for Beginners](https://www.udemy.com/google-analytics-insights/learn/v4/overview) course in Udemy for this lecture.
 
