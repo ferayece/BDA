@@ -1,5 +1,18 @@
 I decided to use my github repo as a diary of my master program. Because I am reaally really messy, so [i am cleanin' out my closet.](https://www.youtube.com/watch?v=RQ9_TKayu9s) 
 
+## End to End Analytics (BDA 564)
+
++ Instructor: Tuna Çakar
+
++ The main purpose of this course is to to provide a comprehensive theoretical perspective as well as hands-on practice for the problems in data analytics. The main content of this graduate course has been divided into three parts: (1) supervised learning, (2) unsupervised learning, (3) reinforcement learning.
+
++ All practices of the lecture are done on Azure Machine Learning Studio. 
+
++ [Here](/files/BDA564EndtoEnd/BDA564Assignment1.pdf) is report of the Assignment 1 about "Sample 5: Train, Test, Evaluate for Binary Classification: Adult Dataset" on Azure Machine Learning Studio.
+
++ [Here](/files/BDA564EndtoEnd/BDA564TermProject.pdf) is the report of the term project which includes churn prediction in telecom endustry developed on Azure ML Studio. 
+
+
 ## Marketing Analytics (BDA 523)
 
 + Instructor: Kalender Karakoç 
