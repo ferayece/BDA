@@ -1,5 +1,16 @@
 I decided to use my github repo as a diary of my master program. Because I am reaally really messy, so [i am cleanin' out my closet.](https://www.youtube.com/watch?v=RQ9_TKayu9s) 
 
+## Model Building and Validation (BDA 551)
+
++ Instructor: Barıs Soybilgen
+
++ How to start from scratch in answering questions about the real world using data. This process involves asking questions, gathering and manipulating data, building models, and ultimately testing and evaluating them. R is the primary programming tool for reading datasets and model building and validation.
+
+
++ Reference Materials:
+- Friedman, J., Hastie, T., & Tibshirani, R. (2016). The Elements of Statistical Learning: Data Mining, Inference, and Prediction (2nd Ed.). New York: Springer.
+- Tibshirani, R., James, G., Witten, D., & Hastie, T. (2013). An Introduction to Statistical Learning with Applications in R. New York: Springer.
+
 ## End to End Analytics (BDA 564)
 
 + Instructor: Tuna Çakar
