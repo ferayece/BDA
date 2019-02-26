@@ -1,0 +1,234 @@
+---
+title: "BDA 551-Assignment 2"
+author: "Feray Ece Topcu"
+date: "July 14, 2018"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+- Load required libraries:
+
+```{r,warning=FALSE}
+library(tree)
+library(ISLR)
+
+
+
+```
+
+- Read Dataset & examine columns: 
+
+```{r,warning=FALSE}
+#attach(Carseats)
+
+carseats <- Carseats
+
+str(carseats)
+
+```
+
+### Question 1. Split the data set into a training set and a test set.
+
+
+
+```{r,warning=FALSE}
+
+set.seed(1)
+train  =  sample(1:nrow(carseats),  nrow(carseats)/4) 
+
+
+```
+
+### Question 2.Fit a regression tree to the training set. Plot the tree, and interpret the results. What test error rate do you obtain ?
+
+
+
+- Fit a tree with train dataset, plot the regression tree:
+
+
+```{r,warning=FALSE}
+
+
+tree.carseats = tree(Sales~., carseats, subset = train) # fit tree
+summary(tree.carseats)
+plot(tree.carseats)
+text(tree.carseats, pretty = 0)
+
+```
+
+
+```{r,warning=FALSE}
+
+yhat = predict(tree.carseats, newdata = carseats[-train, ]) # test set predictions
+table(yhat) # test set predictions
+carseats.test = carseats[-train, "Sales"] # test set actual values
+plot(yhat, carseats.test) # note as we average at each node predictions are bunched
+abline(0, 1)
+mean((yhat - carseats.test)^2) # calc MSE
+
+```
+
+- MSE is *5.179* when seed=1. 
+
+
+### Question 3.Use cross-validation in order to determine the optimal level of tree complexity. Does pruning the tree improve the test error rate ?
+
+
+- Apply cross validation: 
+
+
+```{r,warning=FALSE}
+
+cv.carseats=cv.tree(tree.carseats)
+
+cv.carseats 
+
+plot(cv.carseats$size,cv.carseats$dev,type='b')
+
+```
+
+- Fitting Regression Trees using 8 terminal nodes:
+
+
+
+```{r,warning=FALSE}
+
+prune.carseats=prune.tree(tree.carseats,best=8)  
+plot(prune.carseats)
+text(prune.carseats,pretty=0)
+```
+
+- Calculate MSE for pruned tree:
+
+
+```{r,warning=FALSE}
+
+yhat=predict(prune.carseats,newdata=carseats[-train,])
+carseats.test=carseats[-train,"Sales"] 
+plot(yhat,carseats.test) 
+abline(0,1)
+mean((yhat-carseats.test)^2)
+
+```
+
+
+MSE is *4.780099* for pruned tree. So, pruned tree gives better results. 
+
+
+### Question 4. Use the bagging approach in order to analyze this data. What test error rate do you obtain? Use the “importance()” function to determine which variables are most important. Use ntree=1000.
+
+- Apply bagging:
+
+```{r,warning=FALSE}
+
+library(randomForest)
+set.seed(1)
+
+
+bag.carseats=randomForest(Sales~.,data=carseats,subset=train,mtry=13,ntree=1000,importance=TRUE) 
+
+
+yhat.bag = predict(bag.carseats,newdata=carseats[-train,])
+mean((yhat.bag-carseats.test)^2)  
+
+
+importance(bag.carseats) 
+
+varImpPlot(bag.carseats)
+
+```
+
+MSE is *3.51809* for bagging. So, Bagging is a better algorithm for this dataset to forecast Sales. Due to output of importance() function, Price is the most important predictor in this dataset.
+
+
+### Question 5. Use random forests to analyze this data. What test error rate do you obtain? Use the “importance()” function to determine which variables are most important. Use ntree=1000, mtry=3.
+
+
+```{r,warning=FALSE}
+
+library(randomForest)
+set.seed(1)
+
+
+bag.carseats=randomForest(Sales~.,data=carseats,subset=train,mtry=3,ntree=1000,importance=TRUE) 
+
+
+yhat.bag = predict(bag.carseats,newdata=carseats[-train,])
+mean((yhat.bag-carseats.test)^2)  
+
+
+importance(bag.carseats) 
+
+varImpPlot(bag.carseats)
+
+
+
+```
+
+MSE is *4.417369* for RandomForest while mtry=3 and ntree=1000. So, Bagging is a better method than RandomForest to forecast Sales. 
+
+
+
+### Question 6. By using 10 fold cross validation and grid search detect best parameters of ntree and mtry for random forests. What test error rate do you obtain by using best parameters.
+
+
+- GridSearch & CV:
+
+
+
+```{r,warning=FALSE}
+library(caret) 
+#library("FactoMineR")
+#library("e1071")
+#library(dplyr)
+
+set.seed(1)
+
+fitControl <- trainControl(## 10-fold CV
+  method = "repeatedcv",
+  number = 10,
+  repeats = 1)
+# 
+
+rf_gridsearch <- train(Sales~., data=carseats, method = "rf", 
+                trControl = fitControl, verbose = FALSE, 
+                tuneLength = 4)
+
+plot(rf_gridsearch)                       
+#plot(rf_gridsearch, plotType = "level")
+rf_gridsearch$results  
+
+best(rf_gridsearch$results, metric="Rsquared", maximize=T)
+tolerance(rf_gridsearch$results, metric="Rsquared", maximize=T, tol=2)
+
+
+rf_gridsearch$results[2,]
+```
+
+The best value is *5* for mtry parameter. So, apply RandomForest with the best: 
+
+
+```{r,warning=FALSE}
+
+library(randomForest)
+set.seed(1)
+
+
+bag.carseats=randomForest(Sales~.,data=carseats,subset=train,mtry=5,ntree=1000,importance=TRUE) 
+
+
+yhat.bag = predict(bag.carseats,newdata=carseats[-train,])
+mean((yhat.bag-carseats.test)^2)  
+
+
+importance(bag.carseats) 
+
+varImpPlot(bag.carseats)
+
+
+```
+
+MSE is  *3.864939* when mtry=5 and ntree=1000 for RandomForest which is much more better before tuning. Before tuning, RandomForest's MSE is 4.4173 and MSE of bagging is 3.51809. Due to the results; tuned RandomForest is better than first RandomForest while Bagging approach is a bit improved than tuned RandomForest.
