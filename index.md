@@ -6,6 +6,20 @@ I decided to use my github repo as a diary of my master program. Because I am re
 
 + How to start from scratch in answering questions about the real world using data. This process involves asking questions, gathering and manipulating data, building models, and ultimately testing and evaluating them. R is the primary programming tool for reading datasets and model building and validation.
 
++ Homeworks for theoretical part of the lecture: 
+    - [Homework 1](/files/BDA552Modeling/BDA552Hw1.pdf) is pre-class homework about regression and related sections such that LDA/QDA, bias-variance trade-off and etc.  
+    - [Homework 2](/files/BDA552Modeling/BDA552Hw2.pdf) is pre-class homework about classification and related sections like bagging and etc.
+
++ Assignments for practical part of t he lecture: 
+    - [Here](files/BDA552Modeling/PostClassHw1.pdf) is the report of the classification practice on Boston dataset. It includes logistic regression, LDA, and QDA models using various sub-sets of the predictors. Predictors were selected firstly manually, then using lasso, ridge regression, and PCR. 
+    
+    - [Here](/files/BDA552Modeling/Assignment2.pdf) is the report of the tree practice on CarSeats dataset. It includes regression trees, cross validation/GridSearch, randomForest and etc. 
+    
++ Group project: Forecasting House Prices by Regression and Classification Moldes on Ames Housing Dataset.
+
+    - [Paper of the project](/files/BDA552Modeling/paper.pdf) 
+    - [Code Practice](/files/BDA552Modeling/BDA551TermProject.html)
+    
 
 + Reference Materials:
     - Friedman, J., Hastie, T., & Tibshirani, R. (2016). The Elements of Statistical Learning: Data Mining, Inference, and Prediction (2nd Ed.). New York: Springer.
