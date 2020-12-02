@@ -179,5 +179,5 @@ I decided to use my github repo as a diary of my master program. Because I am re
       
 
 
-*"So once you do know what the question actually is, you'll know what the answer means.”* 
+*"We demand rigidly defined areas of doubt and uncertainty!”* 
 ![image](dontpanic.jpg)
